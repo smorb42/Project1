@@ -41,7 +41,7 @@
     <ClInclude Include="Cora.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
+    <ClInclude Include="GameObject.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AABB.h">
@@ -53,6 +53,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Cora.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="tile.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

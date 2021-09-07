@@ -154,12 +154,13 @@
     <ClInclude Include="AABB.h" />
     <ClInclude Include="Cora.hpp" />
     <ClInclude Include="Game.hpp" />
-    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="TextureManager.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Cora.png" />
     <Image Include="player.png" />
+    <Image Include="tile.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

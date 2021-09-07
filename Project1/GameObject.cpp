@@ -1,4 +1,4 @@
-#include "GameObject.h"
+#include "GameObject.hpp"
 #include "TextureManager.hpp"
 
 GameObject::GameObject(const char* texturesheet, SDL_Renderer* ren, int x, int y)
@@ -10,9 +10,8 @@ GameObject::GameObject(const char* texturesheet, SDL_Renderer* ren, int x, int y
 	ypos = y;
 }
 
-void GameObject::Update()
+void GameObject::Update(int trueframeTime)
 {
-	xpos++;
 
 	srcRect.h = 24;
 	srcRect.w = 24;
@@ -31,12 +30,16 @@ void GameObject::Render()
 }
 
 
+
 //Physics
 
+Vector2 multAdd(Vector2 addvector,Vector2 multvector, int w) {
+	addvector.x += multvector.x * w;
+	addvector.y += multvector.y * w;
+	return addvector;
+}
 
-
-
-bool Physics::AABBvsAABB(AABB a, AABB b)
+bool PhysicsObject::AABBvsAABB(AABB a, AABB b)
 {
 	// Exit with no intersection if found separated along an axis
 	if (a.max.x < b.min.x or a.min.x > b.max.x) return false;
@@ -44,4 +47,29 @@ bool Physics::AABBvsAABB(AABB a, AABB b)
 
 	// No separating axis found, therefor there is at least one overlapping axis
 	return true;
+}
+
+
+void  PhysicsObject::UpdatePhysics(int trueframeTime)
+{
+	mOldPosition = mPosition;
+	mOldSpeed = mSpeed;
+
+	mWasOnGround = mOnGround;
+	mPushedRightWall = mPushesRightWall;
+	mPushedLeftWall = mPushesLeftWall;
+	mWasAtCeiling = mAtCeiling;
+
+	mPosition = multAdd(mPosition, mSpeed , trueframeTime);
+
+	if (mPosition.y < 0.0f)
+	{
+		mPosition.y = 0.0f;
+		mOnGround = true;
+	}
+	else
+		mOnGround = false;
+
+
+
 }

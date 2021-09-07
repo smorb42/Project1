@@ -10,6 +10,7 @@ int main(int argc, const char *argv[])
 
 	Uint32 frameStart;
 	int frameTime;
+	int trueframeTime = 0;
 
 
 	game = new Game();
@@ -21,7 +22,7 @@ int main(int argc, const char *argv[])
 		frameStart = SDL_GetTicks();
 
 		game->handleEvents();
-		game->update();
+		game->update(trueframeTime);
 		game->render();
 
 		frameTime = SDL_GetTicks() - frameStart;
@@ -30,6 +31,8 @@ int main(int argc, const char *argv[])
 		{
 			SDL_Delay(frameDelay - frameTime);
 		}
+
+		trueframeTime = SDL_GetTicks() - frameStart;
 	}
 	
 	game->clean();

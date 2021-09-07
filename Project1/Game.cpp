@@ -1,9 +1,10 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
 #include "Cora.hpp"
-#include "GameObject.h"
+#include "GameObject.hpp"
 
-GameObject* player;
+PhysicsObject* player;
+GameObject* fT;
 
 Game::Game() 
 {}
@@ -46,8 +47,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 
 
-	player = new GameObject("cora.png", renderer, 0, 90);
-
+	player = new PhysicsObject("cora.png", renderer, 0, 90);
+	fT = new GameObject("tile.png", renderer, 100, 70);
 
 }
 
@@ -66,11 +67,12 @@ void Game::handleEvents()
 
 }
 
-void Game::update()
+void Game::update(int trueframeTime)
 {
 
-	player->Update();
-	
+	player->Update(trueframeTime);
+	fT->Update(trueframeTime);
+
 	cnt++;
 	if (cnt == 14)
 	{
@@ -84,6 +86,7 @@ void Game::render()
 	SDL_RenderClear(renderer);
 
 	player->Render();
+	fT->Render();
 
 	SDL_RenderPresent(renderer);
 
